@@ -1,0 +1,16 @@
+{
+  "name": "doubleauction",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "dependencies": {
+    "linq": "^3.0.5",
+    "xee": ">=0.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^2.3.4"
+  }
+}

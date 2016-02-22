@@ -1,5 +1,5 @@
 module.exports = (function() {
-  var Instruction = React.createClass({
+  return React.createClass({
     propTypes:{
       role      : React.PropTypes.string.isRequired,
       cost      : React.PropTypes.number.isRequired,
@@ -34,5 +34,4 @@ module.exports = (function() {
       );
     }
   });
-  return Instruction;
 })();

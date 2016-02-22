@@ -1,0 +1,14 @@
+{
+  "name": "doubleauction",
+  "version": "1.0.0",
+  "main": "script.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "devDependencies": {
+    "browserify": "^12.0.2",
+    "gulp": "^3.9.0",
+    "reactify": "^1.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

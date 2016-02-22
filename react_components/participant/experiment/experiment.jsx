@@ -1,10 +1,9 @@
 module.exports = (function() {
-  var Environment = require('environment');
-  var Instruction = require('./instruction.js');
-  var Market = require('./market.js');
-  var MarketForm = require('./marketform.js');
+  var Instruction = require('./instruction.jsx');
+  var Market = require('./market.jsx');
+  var MarketForm = require('./marketform.jsx');
 
-  var Experiment = React.createClass({
+  return React.createClass({
     render: function() {
       var data = this.props.data;
       return (
@@ -25,8 +24,7 @@ module.exports = (function() {
       );
     },
     sendValueCallback: function(value){
-      Environment.send_data({offer: value});
+      send_data({offer: value});
     }
   });
-  return Experiment;
 })();

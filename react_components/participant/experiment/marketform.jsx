@@ -1,5 +1,5 @@
 module.exports = (function() {
-  var MarketForm = React.createClass({
+  return React.createClass({
     propTypes: {
       sendValueCallback: React.PropTypes.func.isRequired
     },
@@ -25,5 +25,4 @@ module.exports = (function() {
       this.refs.valueBox.value = 0;
     }
   });
-  return MarketForm;
 })();

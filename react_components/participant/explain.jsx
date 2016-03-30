@@ -13,7 +13,7 @@ module.exports = (function() {
           </div>
           <div>
             <h1>説明</h1>
-            あなたの役割は{this.props.student.role}です。<br/>
+            あなたの役割は{this.props.role}です。<br/>
             [前へ]ボタンをクリックすると前のページヘ戻ることができます<br/>
           </div>
           <div>

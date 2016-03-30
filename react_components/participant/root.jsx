@@ -1,54 +1,48 @@
-module.exports = (function(){
-  var Explain = require('./explain.jsx');
-  var Experiment = require('./experiment/experiment.jsx');
+var Explain = require('./explain.jsx');
+var Experiment = require('./experiment/experiment.jsx');
+var Market = require('./experiment/market.jsx');
 
-  var default_data = {
-    state: 'default',
-    data: {
-      student: {
-        role: 'default',
-        cost      : 0,
-        payable   : 0,
-        properties: 0,
-        money     : 0,
-      },
-      list: {
-        sell  : [],
-        buy   : [],
-        finish: [],
-      }
-    }
-  };
-
-  return React.createClass({
-    getDefaultProps: function() {
-      return {data: default_data};
-    },
-    render: function () {
+module.exports = React.createClass({
+  getInitialState: function() {
+    return {loading: true};
+  },
+  componentDidMount: function() {
+    X.onUpdate(this.onUpdate.bind(this));
+  },
+  onUpdate: function(data) {
+    data.loading = false;
+    this.setState(data);
+  },
+  render: function () {
+    if (this.state.loading) {
       return (
-        <div>
-          <center>
-            {(function() {
-              switch (this.props.data.state) {
-                case 'default':
-                  return (
-                    <div>実験開始までしばらくお待ち下さい</div>
-                  );
-                case 'explain':
-                  return (
-                    <Explain student={this.props.data.data.student}></Explain>
-                  );
-                case 'experiment':
-                  return (
-                    <Experiment data={this.props.data.data} />
-                  );
-                default:
-                  return null;
-              }
-            }).bind(this)()}
-          </center>
-        </div>
+        <div>Now loading...</div>
       );
     }
-  });
-})();
+    return (
+      <div className={'page_' + this.state.page}>
+        {(function() {
+          switch (this.state.page) {
+            case 'wait':
+              return (
+                <div>実験開始までしばらくお待ち下さい</div>
+              );
+            case 'experiment':
+              return (
+                <Experiment role={this.state.role} status={this.state.status} orders={this.state.orders} />
+              );
+            case 'result':
+              return (
+                <div>
+                  <h1>Result</h1>
+                  <Market selling={this.state.orders.selling} buying={this.state.orders.buying} concluded={this.state.orders.concluded} />
+                </div>
+              );
+            default:
+              return;
+          }
+        }).call(this)}
+      </div>
+    );
+  }
+});

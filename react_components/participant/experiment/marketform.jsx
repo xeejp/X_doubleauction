@@ -1,28 +1,31 @@
 module.exports = (function() {
   return React.createClass({
-    propTypes: {
-      sendValueCallback: React.PropTypes.func.isRequired
-    },
-    getValue: function() {
-      return this.refs.valueBox.value;
-    },
-    render: function() {
-      return (
-        <div>
-          価格を提示してください<br/>
-          <input type="number" ref="valueBox" onKeyPress={this.onKeyPress} />
-          <button onClick={this.sendValue}>提示</button>
-        </div>
-      );
-    },
     onKeyPress: function(e) {
       if (e.key === "Enter") {
         this.sendValue();
       }
     },
     sendValue: function() {
-      this.props.sendValueCallback(this.getValue());
-      this.refs.valueBox.value = 0;
-    }
+      var value = this.refs.order.value;
+      if ((/[^0-9]+/).test(value)) {
+        // alert(pleaseinputnumber);
+      } else {
+        this.props.sendValueCallback(parseInt(value));
+      }
+      this.refs.order.value = '';
+    },
+    sendCancel: function() {
+      X.sendData('cancelOrder');
+    },
+    render: function() {
+      return (
+        <div>
+          価格を提示してください<br/>
+          <input type="text" ref="order" onKeyPress={this.onKeyPress} />
+          <button onClick={this.sendValue}>提示</button>
+          <button onClick={this.sendCancel}>取消</button>
+        </div>
+      );
+    },
   });
 })();

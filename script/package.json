@@ -1,8 +1,8 @@
 {
-  "name": "doubleauction",
-  "version": "0.0.1",
+  "name": "doubleauction-script",
+  "version": "0.1.0",
   "description": "",
-  "main": "./index.js",
+  "main": "./main.js",
   "scripts": {
     "test": "mocha"
   },

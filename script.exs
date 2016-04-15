@@ -1,5 +1,13 @@
 defmodule DoubleAuction do
+  use Xee.ThemeScript
+
   @script Path.join([__DIR__, "script.js"])
+
+  # Callbacks
+
+  def install do
+    {_, 0} = System.cmd("npm", ["install", "linq"])
+  end
 
   def init do
     call(["init"])
@@ -9,13 +17,15 @@ defmodule DoubleAuction do
     call(["join", Poison.encode!(data), id])
   end
 
-  def receive(data, received) do
+  def handle_received(data, received) do
     call(["receive", Poison.encode!(data), Poison.encode!(received)])
   end
 
-  def receive(data, received, id) do
+  def handle_received(data, received, id) do
     call(["receive", Poison.encode!(data), Poison.encode!(received), id])
   end
+
+  # Other functions
 
   defp call(args) do
     case System.cmd("node", [@script] ++ args) do

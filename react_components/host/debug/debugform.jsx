@@ -1,3 +1,4 @@
+import React from 'react'
 module.exports = React.createClass({
   onClick: function() {
     var type = this.refs.type.value;

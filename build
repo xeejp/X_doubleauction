@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+webpack $1
+cat experiment.js _host.out.js > host.js
+cat experiment.js _participant.out.js > participant.js

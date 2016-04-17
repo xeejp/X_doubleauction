@@ -1,7 +1,7 @@
 var gulp = require('gulp');
 var source = require('vinyl-source-stream');
 var browserify = require('browserify');
-var reactify = require('reactify');
+var babelify = require('babelify');
 var insert = require('gulp-insert');
 var fs = require('fs');
 
@@ -9,7 +9,7 @@ gulp.task('build', function() {
   var preprocess = fs.readFileSync('./react_components/preprocess.jsx');
   // participant.js
   browserify('./react_components/participant.jsx')
-    .transform('reactify')
+    .transform('babelify', {presets: ["es2015", "react"]})
     .bundle()
     .pipe(source('participant.js'))
     .pipe(insert.prepend(preprocess))
@@ -17,7 +17,7 @@ gulp.task('build', function() {
 
   // host.js
   browserify('./react_components/host.jsx')
-    .transform('reactify')
+    .transform('babelify', {presets: ["es2015", "react"]})
     .bundle()
     .pipe(source('host.js'))
     .pipe(insert.prepend(preprocess))

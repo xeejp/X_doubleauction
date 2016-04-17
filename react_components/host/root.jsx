@@ -1,8 +1,14 @@
+import React from 'react'
 var Moderator = require('./moderator.jsx');
 var ParticipantsList = require('./participantslist.jsx');
 var DebugForm = require('./debug/debugform.jsx');
 var Config = require('./config.jsx');
 
+import LinearProgress from 'material-ui/lib/linear-progress';
+import CircularProgress from 'material-ui/lib/circular-progress';
+import RaisedButton from 'material-ui/lib/raised-button';
+import TextField from 'material-ui/lib/text-field';
+import FlatButton from 'material-ui/lib/flat-button';
 module.exports = React.createClass({
   getInitialState: function() {
     return {loading: true};
@@ -16,9 +22,7 @@ module.exports = React.createClass({
   },
   render: function () {
     if (this.state.loading) {
-      return (
-        <div>Now loading...</div>
-      );
+        return (<CircularProgress />);
     }
     return (
       <div>

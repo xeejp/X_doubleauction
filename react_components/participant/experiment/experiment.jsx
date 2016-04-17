@@ -1,3 +1,4 @@
+import React from 'react'
 var Instruction = require('./instruction.jsx');
 var Market = require('./market.jsx');
 var MarketForm = require('./marketform.jsx');

@@ -1,3 +1,4 @@
+import React from 'react';
 module.exports = (function() {
   var PageView = require('./../common/page_view.jsx');
 

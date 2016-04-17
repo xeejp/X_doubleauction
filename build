@@ -2,3 +2,5 @@
 webpack $1
 cat experiment.js _host.out.js > host.js
 cat experiment.js _participant.out.js > participant.js
+rm -f _host.out.js
+rm -f _participant.out.js

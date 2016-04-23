@@ -7,6 +7,7 @@ import FlatButton from 'material-ui/lib/flat-button';
 var Explain = require('./explain.jsx');
 var Experiment = require('./experiment/experiment.jsx');
 var Market = require('./experiment/market.jsx');
+import { DemandAndSupplyCurve, PriceCurve } from './experiment/result.jsx'
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -38,10 +39,14 @@ module.exports = React.createClass({
                 <Experiment role={this.state.role} status={this.state.status} orders={this.state.orders} />
               );
             case 'result':
+              let start = this.state.orders.concluded[0].buying.timestamp
+              let prices = this.state.orders.concluded.map(({ buying }) => { return {timestamp: buying.timestamp - start, price: buying.value} })
               return (
                 <div>
                   <h1>Result</h1>
                   <Market selling={this.state.orders.selling} buying={this.state.orders.buying} concluded={this.state.orders.concluded} />
+                  <DemandAndSupplyCurve orders={this.state.orders} />
+                  <PriceCurve prices={prices} />
                 </div>
               );
             default:

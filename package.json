@@ -22,5 +22,8 @@
     "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0",
     "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "react-d3-basic": "^1.6.11"
   }
 }

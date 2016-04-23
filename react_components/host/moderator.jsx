@@ -17,9 +17,6 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div>
-        <button onClick={this.createEvent('doMatching')}>マッチング</button>
-        <button onClick={this.createEvent('start')}>開始</button>
-        <button onClick={this.createEvent('finish')}>終了</button>
         <RaisedButton label="マッチング" backgroundColor="#81F781" onMouseDown={this.createEvent('doMatching')} style={{margin: 12}} />
         <RaisedButton label="開始" backgroundColor="#81F781" onMouseDown={this.createEvent('start')} style={{margin: 12}} />
         <RaisedButton label="終了" backgroundColor="#FE2E64" onMouseDown={this.createEvent('finish')} style={{margin: 12}} />

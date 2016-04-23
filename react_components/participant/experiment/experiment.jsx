@@ -15,7 +15,7 @@ module.exports = React.createClass({
         <h1>ダブルオークション</h1>
         <Instruction role={this.props.role} status={this.props.status} />
         <br/>
-        <MarketForm sendValueCallback={this.sendValueCallback} />
+        <MarketForm role={this.props.role} status={this.props.status} sendValueCallback={this.sendValueCallback} />
         <br/>
         <p>他の参加者は以下の価格を提示しています</p>
         <br/>

@@ -29,9 +29,6 @@ module.exports = React.createClass({
         <Config title='実験の操作'>
           <Moderator />
         </Config>
-        <Config title='データ送信'>
-          <DebugForm />
-        </Config>
         <Config title='参加者一覧'>
           <ParticipantsList participants={this.state.participants} />
         </Config>

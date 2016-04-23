@@ -45,7 +45,10 @@ module.exports = React.createClass({
                 </div>
               );
             default:
-              return;
+              console.log(this.state.page)
+              return (
+                <Explain />
+              );
           }
         }).call(this)}
       </div>

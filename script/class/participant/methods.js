@@ -46,9 +46,6 @@ module.exports = {
     this.set('ordering', false);
   },
   isOrderable: function(value) {
-    if (this.get('ordering')) {
-      return false;
-    }
     switch (this.get('role')) {
       case 'seller':
         return (this.getStatus('goods') > 0 && value >= this.getStatus('cost'));

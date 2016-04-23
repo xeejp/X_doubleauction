@@ -14,13 +14,17 @@ module.exports = {
 
     var id = this.get('id');
     var role = this.get('role');
-    data.orders[orderTypes[role]] = Enumerable.from(data.orders[orderTypes[role]])
-      .where(function(order) {
-        return order.participant != id;
-      })
-      .toArray();
-      var order = this.createOrder(options.value);
-      data.orders[orderTypes[role]].push(order.getObject());
+    if (this.isOrderable(options.value)) {
+        data.orders[orderTypes[role]] = Enumerable.from(data.orders[orderTypes[role]])
+        .where(function(order) {
+            return order.participant != id;
+        })
+        .toArray();
+        var order = this.createOrder(options.value);
+        data.orders[orderTypes[role]].push(order.getObject());
+    } else {
+        return;
+    }
 
     var sellings = Enumerable.from(data.orders.selling)
       .orderBy('$.value')

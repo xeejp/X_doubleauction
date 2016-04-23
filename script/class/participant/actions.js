@@ -12,13 +12,15 @@ module.exports = {
     if (this.get('page') !== 'experiment') return;
     if (!options.value) return;
 
+    var id = this.get('id');
     var role = this.get('role');
-    if (this.isOrderable(options.value)) {
+    data.orders[orderTypes[role]] = Enumerable.from(data.orders[orderTypes[role]])
+      .where(function(order) {
+        return order.participant != id;
+      })
+      .toArray();
       var order = this.createOrder(options.value);
       data.orders[orderTypes[role]].push(order.getObject());
-    } else {
-      return;
-    }
 
     var sellings = Enumerable.from(data.orders.selling)
       .orderBy('$.value')

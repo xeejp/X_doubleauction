@@ -1,4 +1,5 @@
 import React from 'react'
+
 module.exports = (function() {
   return React.createClass({
     render: function() {
@@ -10,14 +11,14 @@ module.exports = (function() {
               case 'seller':
                 return (
                   <div>
-                    あなたは売り手です<br/> 
+                    あなたは売り手です<br/>
                     あなたは財を{status.cost}円で生産できます<br/>
                   </div>
                 );
               case 'buyer':
                 return (
                   <div>
-                    あなたは買い手です<br/> 
+                    あなたは買い手です<br/>
                     あなたは合計{status.willingness}円まで支払えます<br/>
                   </div>
                 );

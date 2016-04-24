@@ -1,7 +1,7 @@
 import React from 'react'
-var Instruction = require('./instruction.jsx');
-var Market = require('./market.jsx');
-var MarketForm = require('./marketform.jsx');
+import Instruction from './instruction.jsx';
+import Market from './market.jsx';
+import MarketForm from './marketform.jsx';
 
 module.exports = React.createClass({
   sendValueCallback: function(value){
@@ -12,7 +12,6 @@ module.exports = React.createClass({
     var orders = this.props.orders;
     return (
       <div>
-        <h1>ダブルオークション</h1>
         <Instruction role={this.props.role} status={this.props.status} />
         <br/>
         <MarketForm role={this.props.role} status={this.props.status} sendValueCallback={this.sendValueCallback} />

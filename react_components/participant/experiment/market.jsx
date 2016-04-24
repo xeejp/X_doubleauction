@@ -1,5 +1,5 @@
 import React from 'react';
-var Table = require('./../../common/table.jsx');
+import Table from './../../common/table.jsx';
 
 module.exports = React.createClass({
   render: function() {

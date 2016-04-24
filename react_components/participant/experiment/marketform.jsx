@@ -8,16 +8,21 @@ import Card from 'material-ui/lib/card/card';
 import CardActions from 'material-ui/lib/card/card-actions';
 import CardHeader from 'material-ui/lib/card/card-header';
 import CardText from 'material-ui/lib/card/card-text';
+
 module.exports = (function() {
     return React.createClass({
         getInitialState() {
             return {
                 errorText: null,
-                value: ""
+                value: ''
             }
         },
+        onChange: function(e) {
+            this.setState({value: e.target.value})
+            this.isStringValue()
+        },
         isStringValue: function() {
-            var value = this.refs.order.getValue();
+            var value = this.state.value;
             if ((/[^0-9]+/).test(value)) {
                 this.setState({errorText: "半角整数のみ入力可能です"})
             } else {
@@ -25,7 +30,7 @@ module.exports = (function() {
             }
         },
         checkValue: function() {
-            var value = this.refs.order.getValue();
+            var value = this.state.value;
             if (!(/[^0-9]+/).test(value)) {
                 switch (this.props.role) {
                     case 'seller':
@@ -43,7 +48,7 @@ module.exports = (function() {
             }
         },
         sendValue: function() {
-            var value = this.refs.order.getValue();
+            var value = this.state.value;
             if (!(/[^0-9]+/).test(value)) {
                 switch (this.props.role) {
                     case 'seller':
@@ -63,7 +68,7 @@ module.exports = (function() {
                 }
                 this.props.sendValueCallback(parseInt(value));
             }
-            this.setState({value: ""})
+            this.setState({value: ''})
         },
         sendCancel: function() {
             X.sendData('cancelOrder');
@@ -78,9 +83,9 @@ module.exports = (function() {
                             floatingLabelText="価格"
                             errorText={this.state.errorText}
                             onEnterKeyDown={this.sendValue}
-                            onChange={this.isStringValue}
+                            onChange={this.onChange}
                             onBlur={this.checkValue}
-                            defaultValue={this.state.value}
+                            value={this.state.value}
                         />
                         </CardText>
                         <CardActions>

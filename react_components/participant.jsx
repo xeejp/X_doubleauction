@@ -1,6 +1,9 @@
 import React from 'react';
-var ReactDOM = require('react-dom');
-var Root = require('./participant/root.jsx');
+import ReactDOM from 'react-dom';
+import Root from './participant/root.jsx';
+
+import injectTapEventPlugin from 'react-tap-event-plugin';
+injectTapEventPlugin();
 
 ReactDOM.render(
   <Root />,

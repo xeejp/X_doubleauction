@@ -43,7 +43,7 @@ function createRow(row, key, isHeader) {
   return (
     <tr key={key} style={{border: 'solid 1px'}}>
       {row.map(function(data, i) {
-        if (isHeader) { 
+        if (isHeader) {
           return (<th key={i} style={{border: 'solid 1px'}}>{data}</th>);
         } else {
           return (<td key={i} style={{border: 'solid 1px'}}>{data}</td>);

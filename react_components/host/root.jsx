@@ -38,7 +38,7 @@ module.exports = React.createClass({
         </Card>
         <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={true}>
           <CardHeader
-            title="参加者一覧"
+            title={"参加者一覧  (現在の参加者数: " + Object.keys(this.state.participants).length + "人, 現在の取引成立数: " + Object.keys(this.state.orders.concluded).length + ")"}
             actAsExpander={true}
             showExpandableButton={true}
           />

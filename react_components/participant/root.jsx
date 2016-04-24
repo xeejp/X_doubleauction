@@ -63,10 +63,10 @@ module.exports = React.createClass({
                         <Card>
                           <CardHeader title="結果"/>
                           <CardText>
-                              <div>
+                              {((this.state.status.goods == 0 && this.state.role == "buyer") || (this.state.status.goods != 0 && this.state.role == "seller")) ? <p>取引は成立しませんでした。</p> : <div>
                                   <p>{this.state.role == "seller" ? this.state.status.sales : this.state.status.paid}円で取引が成功しました。</p>
-                                  <p>あなたは、{this.state.role == "seller" ? this.state.status.sales - this.state.status.cost : this.state.status.willingness - this.state.status.paid}円得しました。</p>
-                              </div>
+                                  <p>あなたは、{this.state.role == "seller" ? this.state.status.sales - this.status.status.cost : this.state.status.willingness - this.state.status.paid}円得しました。</p>
+                              </div>}
                             <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={false}>
                               <CardHeader
                                 title="表"

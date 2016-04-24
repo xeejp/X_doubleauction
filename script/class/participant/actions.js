@@ -42,10 +42,10 @@ module.exports = {
       var buyer = Participant(data.participants[buying.participant]);
       var value, timestamp;
       if (selling.timestamp < buying.timestamp) {
-        value = selling.value;
+        value = buying.value;
         timestamp = buying.timestamp;
       } else {
-        value = buying.value;
+        value = selling.value;
         timestamp = selling.timestamp;
       }
       seller.sell(value);

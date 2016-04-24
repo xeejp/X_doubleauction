@@ -43,20 +43,22 @@ module.exports = React.createClass({
                     <Experiment role={this.state.role} status={this.state.status} orders={this.state.orders} />
                   );
                 case 'result':
-                  var N = Object.keys(this.state.orders.concluded).length * 2 + Object.keys(this.state.orders.selling).length + Object.keys(this.state.orders.buying).length ;
+                  var N = Object.keys(this.state.orders.concluded).length * 2 + Object.keys(this.state.orders.selling).length + Object.keys(this.state.orders.buying).length;
                   var data = [];
                   for (var i = 1; i <= N / 2; i++) {
-                    data.push({x: i, supply: i * 200, demand: (N - i - 1) * 200 - 100})
+                      data.push({x: i, supply: i * 200, demand: ((N / 2) - i + 1) * 200 - 100})
                   }
-                  let start = this.state.orders.concluded[0].buying.timestamp
+                  let start = Math.max(this.state.orders.concluded[0].buying.timestamp , this.state.orders.concluded[0].selling.timestamp)
                   let prices = this.state.orders.concluded.map(({ buying, selling }) => {
-                      var price;
+                      var time, price;
                       if (buying.timestamp > selling.timestamp) {
+                          time = buying.timestamp;
                           price = buying.value
                       } else {
+                          time = selling.timestamp;
                           price = selling.value
                       }
-                      return {timestamp: buying.timestamp - start, price: price}
+                      return {timestamp: time - start, price: price}
                   })
                   return (
                       <div>

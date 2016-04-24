@@ -36,7 +36,7 @@ module.exports = React.createClass({
             <Moderator />
           </CardText>
         </Card>
-        <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={true}>
+        <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={false}>
           <CardHeader
             title={"参加者一覧  (現在の参加者数: " + Object.keys(this.state.participants).length + "人, 現在の取引成立数: " + Object.keys(this.state.orders.concluded).length + ")"}
             actAsExpander={true}
@@ -59,7 +59,7 @@ module.exports = React.createClass({
                       var N = Object.keys(this.state.participants).length;
                       var data = [];
                       for (var i = 1; i <= N / 2; i++) {
-                        data.push({x: i, supply: i * 200, demand: (N - i - 1) * 200 - 100})
+                        data.push({x: i, supply: i * 200, demand: ((N / 2) - i + 1) * 200 - 100})
                       }
                     return <DemandAndSupplyCurve data={data}/>
                   } else {
@@ -71,13 +71,15 @@ module.exports = React.createClass({
                   {
                     let start = this.state.orders.concluded[0].buying.timestamp
                     let prices = this.state.orders.concluded.map(({ buying, selling }) => {
-                        var price;
+                        var time, price;
                         if (buying.timestamp > selling.timestamp) {
+                            time = buying.timestamp;
                             price = buying.value
                         } else {
+                            time = selling.timestamp;
                             price = selling.value
                         }
-                        return {timestamp: buying.timestamp - start, price: price}
+                        return {timestamp: time - start, price: price}
                     })
                     return <PriceCurve prices={prices} />
                   } else {

@@ -26,7 +26,7 @@ module.exports = React.createClass({
   },
   render: function () {
     if (this.state.loading) {
-        return (<CircularProgress />);
+        return (<center><CircularProgress /></center>);
     }
     return (
       <div>

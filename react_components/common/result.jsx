@@ -1,16 +1,11 @@
 import React, { Component } from 'react'
 import { LineChart } from 'react-d3-basic'
 
-const DemandAndSupplyCurve = ({ orders }) => <LineChart
-    data={[
-        {x: 1, y: 1, z: 4},
-        {x: 2, y: 2, z: 3},
-        {x: 3, y: 3, z: 2},
-        {x: 4, y: 4, z: 1}
-    ]}
+const DemandAndSupplyCurve = ({ data }) => <LineChart
+    data={data}
     chartSeries={[
-        { name: "name", field: "y" },
-        { name: "name", field: "z" }
+        { name: "Demand", field: "demand" },
+        { name: "Supply", field: "supply" }
     ]}
     x={(d) => d.x}
 />

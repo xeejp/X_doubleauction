@@ -43,20 +43,37 @@ module.exports = React.createClass({
                     <Experiment role={this.state.role} status={this.state.status} orders={this.state.orders} />
                   );
                 case 'result':
+                  var N = Object.keys(this.state.orders.concluded).length * 2 + Object.keys(this.state.orders.selling).length + Object.keys(this.state.orders.buying).length ;
+                  var data = [];
+                  for (var i = 1; i <= N / 2; i++) {
+                    data.push({x: i, supply: i * 200, demand: (N - i - 1) * 200 - 100})
+                  }
                   let start = this.state.orders.concluded[0].buying.timestamp
-                  let prices = this.state.orders.concluded.map(({ buying }) => { return {timestamp: buying.timestamp - start, price: buying.value} })
+                  let prices = this.state.orders.concluded.map(({ buying, selling }) => {
+                      var price;
+                      if (buying.timestamp > selling.timestamp) {
+                          price = buying.value
+                      } else {
+                          price = selling.value
+                      }
+                      return {timestamp: buying.timestamp - start, price: price}
+                  })
                   return (
                       <div>
                         <Card>
                           <CardHeader title="結果"/>
                           <CardText>
+                              <div>
+                                  <p>{this.state.role == "seller" ? this.state.status.sales : this.state.status.paid}円で取引が成功しました。</p>
+                                  <p>あなたは、{this.state.role == "seller" ? this.state.status.sales - this.state.status.cost : this.state.status.willingness - this.state.status.paid}円得しました。</p>
+                              </div>
                             <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={false}>
                               <CardHeader
                                 title="表"
                                 actAsExpander={true}
                                 showExpandableButton={true}
                               />
-                              <CardText>
+                              <CardText expandable={true}>
                                 <Market selling={this.state.orders.selling} buying={this.state.orders.buying} concluded={this.state.orders.concluded} />
                               </CardText>
                             </Card>
@@ -66,8 +83,8 @@ module.exports = React.createClass({
                                 actAsExpander={true}
                                 showExpandableButton={true}
                               />
-                              <CardText>
-                                <DemandAndSupplyCurve orders={this.state.orders} />
+                              <CardText expandable={true}>
+                                <DemandAndSupplyCurve data={data} />
                                 <PriceCurve prices={prices} />
                               </CardText>
                             </Card>

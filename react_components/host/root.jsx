@@ -53,12 +53,32 @@ module.exports = React.createClass({
             showExpandableButton={true}
           />
           <CardText actAsExpander={true} expandable={true}>
-              <DemandAndSupplyCurve orders={this.state.orders} />
               {(function() {
                   if (this.state.host.state == "result")
                   {
+                      var N = Object.keys(this.state.participants).length;
+                      var data = [];
+                      for (var i = 1; i <= N / 2; i++) {
+                        data.push({x: i, supply: i * 200, demand: (N - i - 1) * 200 - 100})
+                      }
+                    return <DemandAndSupplyCurve data={data}/>
+                  } else {
+                    return <p>現在需要供給グラフは表示できません</p>
+                  }
+              }).call(this)}
+              {(function() {
+                  if (this.state.host.state == "result" && Object.keys(this.state.participants).length > 0)
+                  {
                     let start = this.state.orders.concluded[0].buying.timestamp
-                    let prices = this.state.orders.concluded.map(({ buying }) => { return {timestamp: buying.timestamp - start, price: buying.value} })
+                    let prices = this.state.orders.concluded.map(({ buying, selling }) => {
+                        var price;
+                        if (buying.timestamp > selling.timestamp) {
+                            price = buying.value
+                        } else {
+                            price = selling.value
+                        }
+                        return {timestamp: buying.timestamp - start, price: price}
+                    })
                     return <PriceCurve prices={prices} />
                   } else {
                     return <p>現在価格曲線グラフは表示できません</p>

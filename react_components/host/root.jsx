@@ -29,72 +29,81 @@ module.exports = React.createClass({
         return (<center><CircularProgress /></center>);
     }
     return (
-      <div>
-        <Card>
-          <CardHeader title="実験の操作"/>
+      <Card>
+        <CardHeader title={"ダブルオークション実験"}/>
           <CardText>
-            <Moderator />
-          </CardText>
-        </Card>
-        <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={false}>
-          <CardHeader
-            title={"参加者一覧  (現在の参加者数: " + Object.keys(this.state.participants).length + "人, 現在の取引成立数: " + Object.keys(this.state.orders.concluded).length + ")"}
-            actAsExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText actAsExpander={true} expandable={true}>
-            <ParticipantsList participants={this.state.participants} />
-          </CardText>
-        </Card>
-        <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={false}>
-          <CardHeader
-            title="グラフ"
-            actAsExpander={true}
-            showExpandableButton={true}
-          />
-          <CardText actAsExpander={true} expandable={true}>
-              {(function() {
-                  if (this.state.host.state == "result")
-                  {
-                      var N = Object.keys(this.state.participants).length;
-                      var data = [];
-                      for (var i = 1; i <= N / 2; i++) {
-                        data.push({x: i, supply: i * 200, demand: ((N / 2) - i + 1) * 200 - 100})
+            <Card>
+              <CardText>
+                  <h5 children="実験ID"/>
+                  <h3>{_x_token}</h3>
+              </CardText>
+            </Card>
+            <Card>
+              <CardHeader title="実験の操作"/>
+              <CardText>
+                <Moderator />
+              </CardText>
+            </Card>
+            <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={false}>
+              <CardHeader
+                title={"参加者一覧  (現在の参加者数: " + Object.keys(this.state.participants).length + "人, 現在の取引成立数: " + Object.keys(this.state.orders.concluded).length + ")"}
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText actAsExpander={true} expandable={true}>
+                <ParticipantsList participants={this.state.participants} />
+              </CardText>
+            </Card>
+            <Card actAsExpander={true} showExpandableButton={true} initiallyExpanded={false}>
+              <CardHeader
+                title="グラフ"
+                actAsExpander={true}
+                showExpandableButton={true}
+              />
+              <CardText actAsExpander={true} expandable={true}>
+                  {(function() {
+                      if (this.state.host.state == "result")
+                      {
+                          var N = Object.keys(this.state.participants).length;
+                          var data = [];
+                          for (var i = 1; i <= N / 2; i++) {
+                            data.push({x: i, supply: i * 200, demand: ((N / 2) - i + 1) * 200 - 100})
+                          }
+                        return <DemandAndSupplyCurve data={data}/>
+                      } else {
+                        return <p>現在需要供給グラフは表示できません</p>
                       }
-                    return <DemandAndSupplyCurve data={data}/>
-                  } else {
-                    return <p>現在需要供給グラフは表示できません</p>
-                  }
-              }).call(this)}
-              {(function() {
-                  if (this.state.host.state == "result" && Object.keys(this.state.participants).length > 0)
-                  {
-                    let start = this.state.orders.concluded[0].buying.timestamp
-                    let prices = this.state.orders.concluded.map(({ buying, selling }) => {
-                        var time, price;
-                        if (buying.timestamp > selling.timestamp) {
-                            time = buying.timestamp;
-                            price = buying.value
-                        } else {
-                            time = selling.timestamp;
-                            price = selling.value
-                        }
-                        return {timestamp: time - start, price: price}
-                    })
-                    return <PriceCurve prices={prices} />
-                  } else {
-                    return <p>現在価格曲線グラフは表示できません</p>
-                  }
-              }).call(this)}
+                  }).call(this)}
+                  {(function() {
+                      if (this.state.host.state == "result" && Object.keys(this.state.participants).length > 0)
+                      {
+                        let start = this.state.orders.concluded[0].buying.timestamp
+                        let prices = this.state.orders.concluded.map(({ buying, selling }) => {
+                            var time, price;
+                            if (buying.timestamp > selling.timestamp) {
+                                time = buying.timestamp;
+                                price = buying.value
+                            } else {
+                                time = selling.timestamp;
+                                price = selling.value
+                            }
+                            return {timestamp: time - start, price: price}
+                        })
+                        return <PriceCurve prices={prices} />
+                      } else {
+                        return <p>現在価格曲線グラフは表示できません</p>
+                      }
+                  }).call(this)}
+              </CardText>
+            </Card>
+            <Card>
+              <CardHeader title="特定のユーザーとしてログイン"/>
+              <CardText>
+                <Controler participants={this.state.participants} />
+              </CardText>
+            </Card>
           </CardText>
         </Card>
-        <Card>
-          <CardHeader title="特定のユーザーとしてログイン"/>
-          <CardText>
-            <Controler participants={this.state.participants} />
-          </CardText>
-        </Card>
-      </div>
     );
   }
 });

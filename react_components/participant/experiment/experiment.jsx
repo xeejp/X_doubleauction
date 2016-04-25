@@ -16,7 +16,13 @@ module.exports = React.createClass({
       <div>
         <Instruction role={role} status={status} />
         <br/>
-        {((status.goods == 0 && role == "buyer") || (status.goods != 0 && role == "seller")) ? <MarketForm role={role} status={status} sendValueCallback={this.sendValueCallback} /> : <div>
+        {((status.goods == 0 && role == "buyer") || (status.goods != 0 && role == "seller")) ?
+            <MarketForm
+                ordering={this.props.ordering}
+                order={this.props.order}
+                role={role}
+                status={status}
+                sendValueCallback={this.sendValueCallback} /> : <div>
             <p>{role == "seller" ? status.sales : status.paid}円で取引が成功しました。</p>
             <p>あなたは、{role == "seller" ? status.sales - status.cost : status.willingness - status.paid}円得しました。</p>
         </div>}

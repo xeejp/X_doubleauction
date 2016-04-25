@@ -30,7 +30,7 @@ module.exports = React.createClass({
     return (
         <div className={'page_' + this.state.page}>
         <Card>
-          <CardHeader title="ダブルオークション"/>
+          <CardHeader title="ダブルオークション実験"/>
           <CardText>
             {(function() {
               switch (this.state.page) {
@@ -40,7 +40,13 @@ module.exports = React.createClass({
                   );
                 case 'experiment':
                   return (
-                    <Experiment role={this.state.role} status={this.state.status} orders={this.state.orders} />
+                      <Experiment
+                          ordering={this.state.ordering}
+                          order={this.state.order}
+                          role={this.state.role}
+                          status={this.state.status}
+                          orders={this.state.orders}
+                      />
                   );
                 case 'result':
                   var N = Object.keys(this.state.orders.concluded).length * 2 + Object.keys(this.state.orders.selling).length + Object.keys(this.state.orders.buying).length;

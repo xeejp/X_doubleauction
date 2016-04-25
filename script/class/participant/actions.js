@@ -14,7 +14,7 @@ module.exports = {
 
     var id = this.get('id');
     var role = this.get('role');
-    if (this.isOrderable(options.value)) {
+    if (this.isOrderable(options.value)) { // Ordering
         data.orders[orderTypes[role]] = Enumerable.from(data.orders[orderTypes[role]])
         .where(function(order) {
             return order.participant != id;

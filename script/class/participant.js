@@ -8,6 +8,7 @@ Participant.create = function(id) {
     page: '',
     role: '',
     status: {},
+    order: 0,
     ordering: false,
   });
 };
@@ -22,6 +23,8 @@ Participant.prototype.createTemplate = function(data) {
       buying : data.orders.buying,
       concluded: data.orders.concluded,
     },
+    order: this.get('order'),
+    ordering: this.get('ordering'),
   };
 };
 Participant.prototype.doAction = function(type, options, data) {

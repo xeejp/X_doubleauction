@@ -56,6 +56,7 @@ module.exports = {
   },
   createOrder: function(value) {
     this.set('ordering', true);
+    this.set('order', value);
     return Order.create(this, value);
   },
 };

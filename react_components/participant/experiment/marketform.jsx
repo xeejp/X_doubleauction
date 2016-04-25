@@ -77,6 +77,9 @@ module.exports = (function() {
             return (
                 <Card>
                     <CardText>
+                        {this.props.ordering
+                            ? <p>あなたは、{this.props.order}円で提案しています。</p>
+                            : null}
                         <TextField
                             ref="order"
                             hintText="価格を提示してください"

@@ -1,3 +1,5 @@
+var webpack = require('webpack')
+
 module.exports = [{
     entry: "./_host.js",
     output: {
@@ -12,11 +14,20 @@ module.exports = [{
             query: {
                 presets: ["es2015", "react"]
             }
-        }, {
-            test: /\.css$/,
         }]
     },
     plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false
+            }
+        })
     ],
     resolve: {
         extensions: [
@@ -41,11 +52,20 @@ module.exports = [{
             query: {
                 presets: ["es2015", "react"]
             }
-        }, {
-            test: /\.css$/,
         }]
     },
     plugins: [
+        new webpack.optimize.OccurenceOrderPlugin(),
+        new webpack.DefinePlugin({
+            'process.env': {
+                'NODE_ENV': JSON.stringify('production')
+            }
+        }),
+        new webpack.optimize.UglifyJsPlugin({
+            compressor: {
+                warnings: false
+            }
+        })
     ],
     resolve: {
         extensions: [

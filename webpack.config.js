@@ -1,7 +1,7 @@
 var webpack = require('webpack')
 
 module.exports = [{
-    entry: "./_host.js",
+    entry: ["./_host.js", "babel-polyfill"],
     output: {
         path: "./",
         filename: "_host.out.js"
@@ -39,7 +39,7 @@ module.exports = [{
         ]
     }
 }, {
-    entry: "./_participant.js",
+    entry: ["./_participant.js", "babel-polyfill"],
     output: {
         path: "./",
         filename: "_participant.out.js"
